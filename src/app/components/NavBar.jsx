@@ -1,15 +1,31 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import { BuildingOfficeIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { BuildingOfficeIcon, PhoneIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useState } from 'react'
+import NavLinks from "./Navlinks"
 
+
+const link = [
+    {
+        path: "/",
+        tag: "Home"
+    },
+    {
+        path: "/",
+        tag: "Distributorship"
+    },
+    {
+        path: "/",
+        tag: "Contact Us"
+    }
+]
 
 
 const NavBar = (props) => {
 
-    const [isSelected, setSelected] = useState("home")
+    const [isSelected, setSelected] = useState(false)
 
   return (
     <div className='container mx-auto flex flex-col'>
@@ -34,12 +50,43 @@ const NavBar = (props) => {
                     </div>
                 </div>
 
-                <Link className='bg-[#293991] px-4 flex items-center justify-center mx-4 h-12 rounded' href="#">
-                    <p className='text-white font-bold text-center'>BUY A UNIT</p>
+                <Link className='bg-[#293991] px-4 hidden sm:flex items-center justify-center mx-4 h-12 rounded' href="#">
+                    <p className='text-white font-bold text-center'>BUY NOW</p>
                 </Link>
+
+                <button onClick={() => {
+                    setSelected(!isSelected)
+                }} className='block sm:hidden'>
+                    {
+                        isSelected ? <XMarkIcon className='w-10 h-10 mx-6 text-[#293991]'/> : <Bars3Icon className='w-10 h-10 mx-6 text-[#293991]' />
+                    }
+                </button>
             </div>
         </div>
-        <div className='container flex justify-evenly flex-col sm:flex-row my-4'> 
+
+        {/* className={isOpen ? styles.open: styles.close} */}
+        
+        <div className={isSelected ? "block": "hidden"}>
+            <div className='container flex sm:hidden justify-evenly flex-col sm:flex-row'> 
+                <div className='border-r py-2  border-l bg-[#293991] hover:bg-[#0078E7] w-full '>
+                    <Link className='w-full flex justify-center items-center' href="/">
+                        <p className='font-bold text-white'>Home</p>
+                    </Link>
+                </div>
+                <div className='border-r py-2  border-l bg-[#293991] hover:bg-[#0078E7] w-full '>
+                    <Link className='w-full flex justify-center items-center' href="/">
+                        <p className='font-bold text-white'>Distrubutors</p>
+                    </Link>
+                </div>
+                <div className='border-r py-2  border-l bg-[#293991] hover:bg-[#0078E7] w-full '>
+                    <Link className='w-full flex justify-center items-center' href="/">
+                        <p className='font-bold text-white'>Contact</p>
+                    </Link>
+                </div>
+            </div>
+        </div>
+
+        <div className='container hidden sm:flex justify-evenly flex-col sm:flex-row my-4'> 
             <div className='border-r py-2  border-l bg-[#293991] hover:bg-[#0078E7] w-full '>
                 <Link className='w-full flex justify-center items-center' href="/">
                     <p className='font-bold text-white'>Home</p>
